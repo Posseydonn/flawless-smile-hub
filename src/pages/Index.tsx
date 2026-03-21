@@ -1,16 +1,41 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useCallback } from "react";
+import { LoadingScreen } from "@/components/LoadingScreen";
+import { Navbar } from "@/components/Navbar";
+import { Hero } from "@/components/Hero";
+import { Services } from "@/components/Services";
+import { Doctors } from "@/components/Doctors";
+import { BeforeAfter } from "@/components/BeforeAfter";
+import { Reviews } from "@/components/Reviews";
+import { About } from "@/components/About";
+import { Process } from "@/components/Process";
+import { Contact } from "@/components/Contact";
+import { StickyCTA } from "@/components/StickyCTA";
+import { Footer } from "@/components/Footer";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const Index = () => {
+  const [loaded, setLoaded] = useState(false);
+  const handleComplete = useCallback(() => setLoaded(true), []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
-    </div>
+    <>
+      {!loaded && <LoadingScreen onComplete={handleComplete} />}
+      <div style={{ opacity: loaded ? 1 : 0, transition: "opacity 0.5s ease-out" }}>
+        <Navbar />
+        <main>
+          <Hero />
+          <Services />
+          <Doctors />
+          <BeforeAfter />
+          <Reviews />
+          <About />
+          <Process />
+          <Contact />
+        </main>
+        <Footer />
+        <StickyCTA />
+      </div>
+    </>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
