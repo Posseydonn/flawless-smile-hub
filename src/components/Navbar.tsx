@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Menu, X, Phone } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Menu, X, Phone, ChevronDown } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const navItems = [
@@ -11,9 +11,21 @@ const navItems = [
   { label: "Контакты", href: "/contacts" },
 ];
 
+const moreItems = [
+  { label: "Прайс-лист", href: "/price" },
+  { label: "Акции", href: "/promotions" },
+  { label: "Технологии", href: "/technologies" },
+  { label: "Блог", href: "/blog" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Галерея", href: "/gallery" },
+  { label: "Сертификаты", href: "/certificates" },
+];
+
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const isHome = location.pathname === "/";
 
@@ -21,6 +33,16 @@ export const Navbar = () => {
     const handle = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handle, { passive: true });
     return () => window.removeEventListener("scroll", handle);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const showTransparent = isHome && !scrolled;
@@ -45,7 +67,7 @@ export const Navbar = () => {
         </Link>
 
         {/* Desktop */}
-        <div className="hidden lg:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-6">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -61,6 +83,35 @@ export const Navbar = () => {
               {item.label}
             </Link>
           ))}
+
+          {/* More dropdown */}
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className={`flex items-center gap-1 text-sm font-medium transition-colors duration-200 hover:text-primary ${
+                showTransparent ? "text-primary-foreground/80" : "text-foreground"
+              }`}
+            >
+              Ещё
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform ${dropdownOpen ? "rotate-180" : ""}`} />
+            </button>
+            {dropdownOpen && (
+              <div className="absolute top-full right-0 mt-2 w-48 bg-background rounded-xl shadow-elevated border border-border py-2 z-50">
+                {moreItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    onClick={() => setDropdownOpen(false)}
+                    className={`block px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted ${
+                      location.pathname === item.href ? "text-primary" : "text-foreground"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="hidden lg:flex items-center gap-4">
@@ -92,9 +143,9 @@ export const Navbar = () => {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-background shadow-elevated border-t border-border">
+        <div className="lg:hidden bg-background shadow-elevated border-t border-border max-h-[80vh] overflow-y-auto">
           <div className="container mx-auto px-6 py-6 flex flex-col gap-4">
-            {navItems.map((item) => (
+            {[...navItems, ...moreItems].map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
