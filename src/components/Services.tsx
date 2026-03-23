@@ -77,12 +77,12 @@ export const Services = () => {
               <h3 className="text-2xl font-bold text-primary-foreground mb-2">Бесплатная консультация</h3>
               <p className="text-primary-foreground/80">3D-диагностика и план лечения в подарок при первом визите</p>
             </div>
-            <a
-              href="#contacts"
+            <Link
+              to="/contacts"
               className="shrink-0 rounded-lg bg-background px-8 py-4 text-base font-semibold text-foreground transition-all duration-200 hover:shadow-elevated"
             >
               Записаться бесплатно
-            </a>
+            </Link>
           </div>
         </ScrollReveal>
       </div>
