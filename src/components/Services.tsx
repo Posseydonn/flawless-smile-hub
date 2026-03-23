@@ -1,5 +1,6 @@
 import { ScrollReveal } from "./ScrollReveal";
 import { Sparkles, Smile, Shield, Heart, Stethoscope } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const services = [
   {
