@@ -1,6 +1,7 @@
 import { ScrollReveal } from "./ScrollReveal";
 import clinicInterior from "@/assets/clinic-interior.jpg";
 import { Check } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const About = () => {
   return (
@@ -11,7 +12,7 @@ export const About = () => {
             <div className="relative">
               <img
                 src={clinicInterior}
-                alt="Интерьер клиники DentaPremium"
+                alt="Интерьер клиники Мисс Стоматология"
                 className="rounded-2xl shadow-elevated w-full"
               />
               <div className="absolute -bottom-6 -right-6 bg-primary rounded-xl p-6 shadow-elevated hidden md:block">
@@ -27,7 +28,7 @@ export const About = () => {
               Мы делаем стоматологию комфортной и предсказуемой
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-8">
-              DentaPremium — это современный стоматологический центр с фокусом на результат и комфорт пациента.
+              Мисс Стоматология — это современный стоматологический центр с фокусом на результат и комфорт пациента.
               Мы используем только сертифицированные материалы и оборудование мировых производителей.
             </p>
 
@@ -48,12 +49,12 @@ export const About = () => {
               ))}
             </div>
 
-            <a
-              href="#contacts"
+            <Link
+              to="/contacts"
               className="inline-flex items-center rounded-lg bg-primary px-8 py-4 text-base font-semibold text-primary-foreground transition-all duration-200 hover:bg-clinic-red-dark"
             >
               Записаться на экскурсию
-            </a>
+            </Link>
           </ScrollReveal>
         </div>
       </div>

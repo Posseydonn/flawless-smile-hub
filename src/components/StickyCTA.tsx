@@ -1,4 +1,5 @@
 import { Phone } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const StickyCTA = () => {
   return (
@@ -10,13 +11,13 @@ export const StickyCTA = () => {
       >
         <Phone className="w-6 h-6 text-accent-foreground" />
       </a>
-      <a
-        href="#contacts"
+      <Link
+        to="/contacts"
         className="hidden md:flex w-14 h-14 rounded-full bg-primary items-center justify-center shadow-elevated glow-red transition-transform duration-200 hover:scale-105"
         aria-label="Записаться"
       >
         <span className="text-primary-foreground text-lg font-bold">→</span>
-      </a>
+      </Link>
     </div>
   );
 };

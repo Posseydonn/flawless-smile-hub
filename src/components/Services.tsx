@@ -1,5 +1,6 @@
 import { ScrollReveal } from "./ScrollReveal";
 import { Sparkles, Smile, Shield, Heart, Stethoscope } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const services = [
   {
@@ -58,12 +59,12 @@ export const Services = () => {
                 <p className="text-muted-foreground text-sm leading-relaxed flex-1 mb-6">{service.description}</p>
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-semibold text-accent">{service.price}</span>
-                  <a
-                    href="#contacts"
+                  <Link
+                    to="/contacts"
                     className="text-sm font-semibold text-primary hover:text-clinic-red-dark transition-colors duration-200"
                   >
                     Подробнее →
-                  </a>
+                  </Link>
                 </div>
               </div>
             </ScrollReveal>
@@ -76,12 +77,12 @@ export const Services = () => {
               <h3 className="text-2xl font-bold text-primary-foreground mb-2">Бесплатная консультация</h3>
               <p className="text-primary-foreground/80">3D-диагностика и план лечения в подарок при первом визите</p>
             </div>
-            <a
-              href="#contacts"
+            <Link
+              to="/contacts"
               className="shrink-0 rounded-lg bg-background px-8 py-4 text-base font-semibold text-foreground transition-all duration-200 hover:shadow-elevated"
             >
               Записаться бесплатно
-            </a>
+            </Link>
           </div>
         </ScrollReveal>
       </div>
